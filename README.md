@@ -1,4 +1,4 @@
-![LOGO](views/pictures/logo.png)
+![LOGO](views/pics/logo.png)
 
 # HyperKcal - Your Ultimate Calorie Tracker
 
