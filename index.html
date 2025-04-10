@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HyperKcal - Home</title>
+  <link rel="stylesheet" href="views/css/index.css" />
+  <link rel="icon" href="views/pics/favicom.png">
+</head>
+
+<body>
+    <header class="glass-header">
+        <div class="nav-left">
+          <div class="icon" onclick="redirect('calculator.html')">
+            <img src="views/pics/cal.png" alt="Calorie Calculator" />
+            <span>Calorie Calculator</span>
+          </div>
+          <div class="icon" onclick="redirect('progress.html')">
+            <img src="views/pics/progress.png" alt="Progress Tracker" />
+            <span>Progress Tracker</span>
+          </div>
+          <div class="icon" onclick="redirect('meals.html')">
+            <img src="views/pics/meala.png" alt="Meal Suggestions" />
+            <span>Meal Suggestions</span>
+          </div>
+        </div>
+      
+        <!-- 🔥 Center Logo -->
+        <div class="logo">
+          <img src="views/pics/logo.png" alt="HyperKcal Logo" />
+        </div>
+      
+        <div class="nav-right" id="navAuth">
+          <div class="icon" onclick="openModal('login')">
+            <img src="views/pics/login.png" alt="Login" />
+            <span>Login</span>
+          </div>
+          <div class="icon" onclick="openModal('signup')">
+            <img src="views/pics/signup.png" alt="Signup" />
+            <span>Signup</span>
+          </div>
+          <div class="icon" onclick="openFAQ()">
+            <img src="views/pics/help-icon.png" alt="Help" />
+            <span>Help</span>
+          </div>
+        </div>
+      </header>
+      
+
+  <section class="hero">
+    <div class="bowl-container">
+      <img src="views/pics/Hld.png" alt="Salad Bowl" class="salad-bowl" />
+    </div>
+    <div class="changing-text">
+      <span id="typewriter"></span>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>What We Offer</h2>
+    <div class="card" onclick="redirect('calculator.html')">
+      <img src="views/pics/calorie-card.jpg" alt="Calorie" />
+      <div class="card-info">
+        <h3>Calorie Calculator</h3>
+        <p>Count calories in meals or add your own.</p>
+      </div>
+    </div>
+    <div class="card" onclick="redirect('progress.html')">
+      <img src="views/pics/progress-card.jpg" alt="Progress" />
+      <div class="card-info">
+        <h3>Progress Tracker</h3>
+        <p>Log meals, weight, and macros.</p>
+      </div>
+    </div>
+    <div class="card" onclick="redirect('meals.html')">
+      <img src="views/pics/meal-card.jpg" alt="Meal" />
+      <div class="card-info">
+        <h3>Meal Suggestions</h3>
+        <p>Smart suggestions based on your goal: bulk, keto, cut, etc.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>About HyperKcal</h2>
+    <p>HyperKcal was built by a gym enthusiast who struggled with managing macros. This app brings together calorie counting, AI meal planning, and progress tracking in one place to make your fitness journey simpler.</p>
+  </section>
+
+  <footer>
+    <div class="footer-tag">
+      <img src="views/pics/footer-img.jpg" alt="Tagline Image" />
+      <p>"Fuel Smart. Train Hard. Track Everything."</p>
+    </div>
+  </footer>
+
+  <script src="views/js/index.js"></script>
+</body>
+
+</html>
