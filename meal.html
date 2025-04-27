@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HyperKcal | Meal Suggestions</title>
+  <link rel="icon" href="views/pics/favicom.png">
+  <link rel="stylesheet" href="views/css/meal.css" />
+</head>
+<body>
+  <div class="meal-container">
+    <div class="left-side">
+      <img src="views/pics/fitness-quote.png" alt="Motivational" />
+      <a href="calorie-calculator.html" class="go-back-btn">← Go Back</a>
+    </div>
+
+    <div class="right-side">
+      <div class="selector-section">
+        <div class="slider-wrapper">
+          <label>Choose Your Goal</label>
+          <div class="slider" id="goalSlider">
+            <span data-goal="cut">Cut</span>
+            <span data-goal="bulk">Bulk</span>
+            <span data-goal="maintain">Maintain</span>
+            <span data-goal="recomp">Recomp</span>
+            <span data-goal="fatloss">Fat Loss</span>
+          </div>
+        </div>
+
+        <div class="slider-wrapper hidden" id="dietTypeWrapper">
+          <label>Choose Diet Type</label>
+          <div class="slider" id="dietSlider">
+            <span data-diet="veg">Vegetarian</span>
+            <span data-diet="nonveg">Non-Vegetarian</span>
+            <span data-diet="egg">Eggetarian</span>
+            <span data-diet="vegan">Vegan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-grid" id="mealCards"></div>
+    </div>
+  </div>
+
+  <div class="popup hidden" id="popup">
+    <div class="popup-content">
+      <div class="popup-img">
+        <img src="" alt="" id="popupImage">
+        <span id="dietTag"></span>
+      </div>
+      <div class="popup-text">
+        <span class="close" onclick="closePopup()">×</span>
+        <h2 id="popupTitle"></h2>
+        <p><strong>Requirements:</strong> <span id="popupReq"></span></p>
+        <p><strong>Steps:</strong> <span id="popupSteps"></span></p>
+        <p><strong>Calories:</strong> <span id="popupKcal"></span> kcal</p>
+        <p><strong>Protein:</strong> <span id="popupProtein"></span> g</p>
+        <p><strong>Fats:</strong> <span id="popupFats"></span> g</p>
+        <p><strong>Fibre:</strong> <span id="popupFibre"></span> g</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="views/js/meal.js"></script>
+</body>
+</html>
