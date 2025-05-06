@@ -1,9 +1,9 @@
 ![LOGO](views/pics/logo.png)
 
-# HyperKcal - Your Ultimate Calorie Tracker
+# Calorie Coded - Your Ultimate Calorie Tracker
 
-## 🚀 About HyperKcal
-HyperKcal is a powerful calorie tracking web application designed to help users efficiently manage their nutrition and fitness goals. It provides accurate calculations, meal recommendations, and progress tracking to make fitness journeys easier.
+## 🚀 About Calorie Coded
+Calorie Coded is a powerful calorie tracking web application designed to help users efficiently manage their nutrition and fitness goals. It provides accurate calculations, meal recommendations, and progress tracking to make fitness journeys easier.
 
 ## 🔥 Features
 - **Calorie Counter** – Track daily calorie intake.
