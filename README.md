@@ -9,7 +9,6 @@ Calorie Coded is a powerful calorie tracking web application designed to help us
 - **Calorie Counter** – Track daily calorie intake.
 - **Maintenance Calorie Calculator** – Find out how many calories you need to maintain weight.
 - **Calorie Surplus/Deficit Calculator** – Adjust your intake based on weight, height, and age.
-- **Advanced Accuracy** – Uses body measurements for precise calculations.
 - **Macro Breakdown** – Get protein, carbs, and fats breakdown based on your goal.
 - **AI-Powered Meal Suggestions** – Smart recommendations for hitting calorie/macro targets.
 - **Food Database** – Easily search and log meals.
