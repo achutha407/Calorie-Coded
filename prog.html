@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Progress Tracker | Calorie Coded</title>
+  <link rel="icon" href="views/pics/favicom.png">
+  <link rel="stylesheet" href="views/css/prog.css" />
+</head>
+<body>
+  <div class="page-container">
+    <a href="index.html" class="go-back-btn">← Go Back</a>
+    <!-- Left Image -->
+    <div class="side-image left">
+      <img src="views/pics/menrun.png" alt="Left Progress">
+     
+
+    </div>
+
+    <!-- Progress Tracker Form -->
+    <section class="tracker-wrapper">
+      <h1>Progress Tracker</h1>
+
+      <div class="input-group">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter your weight" />
+      </div>
+
+      <div class="input-group">
+        <label for="waist">Waist (cm):</label>
+        <input type="number" id="waist" placeholder="Enter waist size" />
+      </div>
+
+      <div class="input-group">
+        <label for="biceps">Biceps (cm):</label>
+        <input type="number" id="biceps" placeholder="Enter biceps size" />
+      </div>
+
+      <div class="input-group">
+        <label for="chest">Chest (cm):</label>
+        <input type="number" id="chest" placeholder="Enter chest size" />
+      </div>
+
+      <div class="input-group">
+        <label for="thighs">Thighs (cm):</label>
+        <input type="number" id="thighs" placeholder="Enter thighs size" />
+      </div>
+
+      <button id="save-btn">Save Progress</button>
+
+      <div class="log-section">
+        <h2>Your Progress Log</h2>
+        <ul id="log-list"></ul>
+      </div>
+    </section>
+
+    <!-- Right Image -->
+    <div class="side-image right">
+      <img src="views/pics/inair3.png" alt="Right Progress">
+    </div>
+  </div>
+
+  <script src="views/js/prog.js"></script>
+</body>
+</html>
