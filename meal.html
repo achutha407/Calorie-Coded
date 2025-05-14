@@ -1,18 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HyperKcal | Meal Suggestions</title>
+  <title>Calorie Coded | Meal Suggestions</title>
   <link rel="icon" href="views/pics/favicom.png">
   <link rel="stylesheet" href="views/css/meal.css" />
 </head>
 <body>
   <div class="meal-container">
-    <div class="left-side">
-      <img src="views/pics/fitness-quote.png" alt="Motivational" />
-      <a href="calorie-calculator.html" class="go-back-btn">← Go Back</a>
+ 
+
+      <div class="left-side">
+        <img src="views/pics/fmuscle2.png" alt="Fitness" class="main-img"/>
+        <img src="views/pics/fire.png" alt="Fitness" class="overlay-img"/>
+        <img src="views/pics/fire.png" alt="Fitness" class="overlay-img-flipped"/>
+      <a href="index.html" class="go-back-btn">← Go Back</a>
     </div>
 
     <div class="right-side">
@@ -29,16 +32,17 @@
         </div>
 
         <div class="slider-wrapper hidden" id="dietTypeWrapper">
-          <label>Choose Diet Type</label>
+          <label>Choose Diet Type (CLICK AGAIN TO GET NEW RECIPES)</label>
           <div class="slider" id="dietSlider">
             <span data-diet="veg">Vegetarian</span>
             <span data-diet="nonveg">Non-Vegetarian</span>
             <span data-diet="egg">Eggetarian</span>
             <span data-diet="vegan">Vegan</span>
           </div>
-        </div>
       </div>
-
+   
+      </div>
+  
       <div class="card-grid" id="mealCards"></div>
     </div>
   </div>
@@ -61,6 +65,8 @@
       </div>
     </div>
   </div>
+
+  
 
   <script src="views/js/meal.js"></script>
 </body>
