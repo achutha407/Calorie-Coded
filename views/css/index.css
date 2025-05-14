@@ -1,3 +1,4 @@
+
 /* ========== GLOBAL STYLES ========== */
 * {
   margin: 0;
@@ -50,7 +51,7 @@ body {
 }
 
 .logo img {
-  height: 70px;
+  height: 75px;
 }
 
 /* ========== NAV ICONS ========== */
@@ -284,7 +285,7 @@ footer {
   }
 
   .logo img {
-    height: 100px;
+    height: 70px;
   }
 
   .about p {
@@ -295,3 +296,218 @@ footer {
     padding: 40px 20px;
   }
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.5);
+}
+
+
+.modal-content {
+  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(15px);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(255, 100, 0, 0.7);
+  color: #fff;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 12px;
+  background: #ff5722;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #e64a19;
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Accordion */
+.accordion-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  text-align: left;
+  font-weight: bold;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #fff;
+}
+
+.accordion-content {
+  display: none;
+  padding: 10px;
+  color: #ccc;
+}
+
+.accordion-item.active .accordion-content {
+  display: block;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.9); /* More visible */
+}
+.custom-alert {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 15px rgba(255, 80, 80, 0.5);
+  font-size: 16px;
+  z-index: 9999;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+  border: 1px solid #ff4444;
+}
+
+.custom-alert.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+/* HELP MODAL STYLES */
+.cc-help-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+}
+
+.cc-help-content {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 20px rgba(255, 100, 0, 0.7);
+  color: #fff;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cc-help-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.cc-help-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.cc-help-accordion .cc-help-item {
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cc-help-question {
+  background: none;
+  border: none;
+  color: #ff784e;
+  font-size: 18px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 0;
+  transition: color 0.3s ease;
+}
+
+.cc-help-question:hover {
+  color: #ffaa7a;
+}
+
+.cc-help-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+  padding: 0 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 2px solid #ff5722;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+.cc-help-item.active .cc-help-answer {
+  max-height: 200px; /* Enough height for content */
+  padding: 15px;
+}
+
+.cc-help-question {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  text-align: left;
+  width: 100%;
+  padding: 10px 15px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.cc-help-question:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cc-help-item.active .cc-help-question {
+  background: rgba(255, 87, 34, 0.2);
+}
+
+.faq-close-btn {
+  position: absolute;
+  top: 12px; /* Adjust as needed */
+  right: 17px; /* Adjust as needed */
+  font-size: 24px; /* Adjust size of the X */
+  color: #fff; /* Ensure the color stands out */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10; /* Ensure the button is on top */
+}
+
+
