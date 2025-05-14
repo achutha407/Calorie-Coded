@@ -1,1 +1,277 @@
 
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+  }
+  body {
+    background: linear-gradient(135deg, #000000, #2c2c2c, #bc5f03, #a86904);
+    background-size: 400% 400%;
+    animation: gradientMotion 10s ease infinite
+    
+  }
+  
+/* Add glow effect to the cursor */
+body {
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.8); /* Glow effect */
+}
+
+@keyframes fire-glow {
+  0%, 100% { filter: drop-shadow(0 0 10px orange); }
+  50% { filter: drop-shadow(0 0 25px rgb(248, 168, 22)); }
+}
+@keyframes gradientMotion {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+  .meal-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .left-side {
+    width: 35%;
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+  }
+  .main-img {
+    width: 80%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 12px;
+    object-fit: contain; /* Prevent cropping */
+  }
+  
+
+  .overlay-img{
+    position: absolute;
+    bottom: 50%;
+    right: -70px;
+    width: 65%;
+    height: 50%;
+    object-fit: contain;
+    z-index: 2;
+    transform: rotate(60deg);
+  }
+
+  .overlay-img-flipped{
+    position: absolute;
+    top: 35%;
+    left: -80px;
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    z-index: 2;
+    transform: rotate(220deg);
+  }
+  
+  .go-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ffffff33;
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  .go-back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .right-side {
+    width: 65%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .selector-section {
+    margin-bottom: 2rem;
+  }
+  .slider-wrapper label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #ddd;
+  }
+  
+  .slider-wrapper {
+    margin-bottom: 1.2rem;
+  }
+  
+  .slider {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    cursor: pointer;
+  }
+  .slider span {
+    padding: 10px 16px;
+    background: #333;
+    border-radius: 6px;
+    border: 1px solid #444;
+    transition: 0.3s;
+  }
+  .slider span:hover, .slider span.active {
+    background: #ff5e00;
+    border-color: #ff5e00;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .card {
+    background: #fff;
+    color: #000;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+    height: 210px;
+    width:410px; /* or try 160px or whatever fits */
+
+  }
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  .card-img {
+    width: 60%;
+  }
+  .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .card-info {
+    
+    padding: 0.8rem;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  .card {
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  .popup-content {
+    display: flex;
+    width: 70%;
+    height: 70vh;
+    background: #222;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+  .popup-img {
+    width: 30%;
+    background: #000;
+    position: relative;
+  }
+  .popup-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #dietTag {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background: #ff5e00;
+    border-radius: 5px;
+    font-size: 0.75rem;
+  }
+  .popup-text {
+    width: 70%;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+  .popup-text .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+  }
+  .hidden {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+      row-gap: 1rem; /* default was 1.5rem */
+
+    }
+  
+    .popup-content {
+      flex-direction: column;
+      width: 90%;
+      height: 90vh;
+    }
+  
+    .popup-img, .popup-text {
+      width: 100%;
+      height: 50%;
+    }
+  }
+  .overlay-img,
+.overlay-img-flipped {
+  pointer-events: none; /* Ignore mouse clicks */
+}
+.card h3,
+.card p {
+  margin: 4px 0;  /* reduce from default 8px or 16px */
+  line-height: 2;  /* tighter line spacing */
+}
+#recipesLabel {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(255, 140, 0, 0.6);
+}
+
+.hidden {
+  display: none !important;
+}
