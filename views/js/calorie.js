@@ -1,4 +1,3 @@
-
 const form = document.getElementById('calorieForm');
 const resultSection = document.getElementById('resultSection');
 const calorieOutput = document.getElementById('calorieOutput');
