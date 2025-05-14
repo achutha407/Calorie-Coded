@@ -1,4 +1,24 @@
+let db;
 
+const request = indexedDB.open("HyperKcalDB", 1);
+
+request.onerror = (event) => {
+  console.error("Database error:", event.target.errorCode);
+};
+
+request.onsuccess = (event) => {
+  db = event.target.result;
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const justLoggedIn = localStorage.getItem("justLoggedIn");
+
+  if (loggedInUser) {
+    updateUIAfterLogin(loggedInUser);
+    if (justLoggedIn === "true") {
+      showCustomAlert("Login successful!"); // Only shows once
+      localStorage.removeItem("justLoggedIn"); // Reset flag
+    }
+  }
+};
 // ========== TYPEWRITER EFFECT ==========
 const texts = ["Track. Train. Transform.", "Fuel Your Goals", "Your Macro Buddy", "Let’s Get Shredded"];
 let i = 0, j = 0, isDeleting = false;
@@ -26,120 +46,246 @@ function typeEffect() {
 
 typeEffect();
 
-
-// Smooth Scrolling Navigation
-document.querySelectorAll('.icon').forEach(item => {
-  item.addEventListener('click', function(event) {
-    event.preventDefault();
-    const targetId = this.querySelector('span').textContent.toLowerCase().replace(' ', '');
-    document.getElementById(targetId)?.scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-});
-
-// Open Login/Signup Modal
-function openModal(type) {
-  let modal = document.createElement('div');
-  modal.classList.add('modal');
-  modal.innerHTML = `
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2>${type === 'login' ? 'Login' : 'Sign Up'}</h2>
-      <form id="${type}-form">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">${type === 'login' ? 'Login' : 'Create Account'}</button>
-      </form>
-    </div>
-  `;
-  document.body.appendChild(modal);
-}
-
-// Close Modal
-function closeModal() {
-  document.querySelector('.modal')?.remove();
-}
-
-// Handle Login and Sign Up Forms (using local storage for simplicity)
-document.body.addEventListener('submit', function (event) {
-  if (event.target.id === 'login-form' || event.target.id === 'signup-form') {
-    event.preventDefault();
-
-    let email = event.target.email.value;
-    let password = event.target.password.value;
-    
-    if (event.target.id === 'login-form') {
-      let users = JSON.parse(localStorage.getItem('users')) || [];
-      let user = users.find(u => u.email === email && u.password === password);
-
-      if (user) {
-        alert('Login successful!');
-        closeModal();
-      } else {
-        alert('Invalid credentials');
-      }
-    } else if (event.target.id === 'signup-form') {
-      let users = JSON.parse(localStorage.getItem('users')) || [];
-      users.push({ email, password });
-      localStorage.setItem('users', JSON.stringify(users));
-      alert('Account created successfully!');
-      closeModal();
-    }
-  }
-});
-// IntersectionObserver to detect when cards come into view
-const cards = document.querySelectorAll('.card');
-
-const checkVisibility = () => {
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-      card.classList.add('visible');
-    } else {
-      card.classList.remove('visible');
-    }
-  });
+request.onupgradeneeded = (event) => {
+  db = event.target.result;
+  const userStore = db.createObjectStore("users", { keyPath: "username" });
+  userStore.createIndex("email", "email", { unique: true });
 };
 
-window.addEventListener('scroll', checkVisibility);
-checkVisibility(); // Check on initial load
-
-
-// Options for the observer (threshold means when 50% of the card is visible)
-const options = {
-  threshold: 0.5
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    } else {
-      entry.target.classList.remove('visible');
-    }
-  });
-}, options);
-
-// Observe each card
-cards.forEach(card => {
-  observer.observe(card);
-});
-const cursor = document.getElementById('cursor');
-
-document.addEventListener('mousemove', (e) => {
-  cursor.style.left = `${e.clientX - cursor.offsetWidth / 2}px`;
-  cursor.style.top = `${e.clientY - cursor.offsetHeight / 2}px`;
-});
-
-// Redirect function for navigation
 function redirect(page) {
   window.location.href = page;
 }
 
-// Initialize Typewriter effect on page load
-window.onload = function() {
-  typeWriter();
-};
+function openModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+
+  function signupUser() {
+    const username = document.getElementById("signupUsername").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const confirmPassword = document.getElementById("signupConfirmPassword").value;
+  
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+  
+    const tx = db.transaction(["users"], "readwrite");
+    const store = tx.objectStore("users");
+    const request = store.add({ username, email, password });
+  
+    request.onsuccess = () => {
+      alert("Signup successful!");
+      closeModal('signup'); // Close modal after signup
+    };
+  
+    request.onerror = () => {
+      alert("Username or email already exists.");
+    };
+  }
+  
+  function loginUser() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value;
+  
+    const tx = db.transaction(["users"], "readonly");
+    const store = tx.objectStore("users");
+    const request = store.get(username);
+  
+    request.onsuccess = () => {
+      const user = request.result;
+      if (!user) {
+        alert("Login failed: User not found.");
+        return;
+      }
+      if (user.password === password) {
+        localStorage.setItem("loggedInUser", user.username);
+        localStorage.setItem("justLoggedIn", "true");
+        updateUIAfterLogin(user.username);
+        closeModal('login'); // Close modal after successful login
+        showCustomAlert("Login successful!");
+        redirect('home.html'); // Redirect to home page or dashboard
+      } else {
+        alert("Login failed: Incorrect password.");
+      }
+    };
+  
+    request.onerror = () => {
+      alert("Login failed.");
+    };
+  }
+  
+
+function logoutUser() {
+  localStorage.removeItem("loggedInUser");
+  const navRight = document.getElementById("navAuth");
+
+  navRight.innerHTML = `
+    <div class="icon" onclick="openModal('login')">
+      <img src="views/pics/login.png" alt="Login" />
+      <span>Login</span>
+    </div>
+    <div class="icon" onclick="openModal('signup')">
+      <img src="views/pics/signup.png" alt="Signup" />
+      <span>Signup</span>
+    </div>
+    <div class="icon" onclick="openModal('helpModal')">
+      <img src="views/pics/help.png" alt="Help" />
+      <span>Help</span>
+    </div>
+  `;
+
+  showCustomAlert("Logged out successfully!");
+}
+
+
+const texts = ["Track. Train. Transform.", "Fuel Your Goals", "Your Macro Buddy", "Let’s Get Shredded"];
+let i = 0, j = 0, isDeleting = false;
+const typeEl = document.getElementById("typewriter");
+
+function typeEffect() {
+  const current = texts[i];
+  typeEl.textContent = current.substring(0, j);
+
+  if (isDeleting) {
+    j--;
+    if (j === 0) {
+      isDeleting = false;
+      i = (i + 1) % texts.length;
+    }
+  } else {
+    j++;
+    if (j === current.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 1000);
+      return;
+    }
+  }
+  setTimeout(typeEffect, isDeleting ? 50 : 100);
+}
+typeEffect();
+function updateUIAfterLogin(username) {
+  const navRight = document.getElementById("navAuth");
+
+  navRight.innerHTML = `
+    <div class="icon user">
+      <img src="views/pics/user.png" alt="User" />
+      <span>@${username}</span>
+    </div>
+    <div class="icon" onclick="logoutUser()">
+      <img src="views/pics/logout.png" alt="Logout" />
+      <span>Logout</span>
+    </div>
+    <div class="icon" onclick="openFAQ()">
+      <img src="views/pics/help.png" alt="Help" />
+      <span>Help</span>
+    </div>
+  `;
+}
+function logoutUser() {
+  localStorage.removeItem("loggedInUser");
+  const navRight = document.getElementById("navAuth");
+
+  navRight.innerHTML = `
+    <div class="icon" onclick="openModal('login')">
+      <img src="views/pics/login.png" alt="Login" />
+      <span>Login</span>
+    </div>
+    <div class="icon" onclick="openModal('signup')">
+      <img src="views/pics/signup.png" alt="Signup" />
+      <span>Signup</span>
+    </div>
+    <div class="icon" onclick="openModal('helpModal')">
+      <img src="views/pics/help.png" alt="Help" />
+      <span>Help</span>
+    </div>
+  `;
+
+  showCustomAlert("Logged out successfully!");
+}
+
+// Open modal function
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  modal.showModal();  // Open the modal
+}
+
+// Close modal when the close button is clicked
+const closeHelp = document.getElementById("closeHelp");
+closeHelp.addEventListener("click", () => {
+  const helpModal = document.getElementById("helpModal");
+  helpModal.close();  // Close the modal
+});
+
+// Accordion functionality
+const accordions = document.querySelectorAll(".accordion");
+
+accordions.forEach(acc => {
+  acc.addEventListener("click", function () {
+    this.classList.toggle("active");
+    const panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+});
+
+function showCustomAlert(message) {
+  const alertBox = document.getElementById("customAlert");
+  alertBox.textContent = message;
+  alertBox.style.display = "block";
+  alertBox.classList.add("show");
+
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+    alertBox.style.display = "none";
+  }, 3000);
+}}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const ccHelpBtn = document.getElementById("cc-helpBtn");
+  const ccHelpModal = document.getElementById("cc-helpModal");
+  const ccHelpClose = document.getElementById("cc-helpCloseBtn");
+
+  if (ccHelpBtn && ccHelpModal && ccHelpClose) {
+    ccHelpBtn.addEventListener("click", () => {
+      ccHelpModal.style.display = "flex";
+    });
+
+    ccHelpClose.addEventListener("click", () => {
+      ccHelpModal.style.display = "none";
+    });
+  }
+
+  const ccHelpItems = document.querySelectorAll(".cc-help-item");
+  ccHelpItems.forEach((item) => {
+    const question = item.querySelector(".cc-help-question");
+    question.addEventListener("click", () => {
+      item.classList.toggle("active");
+    });
+  });
+  const cards = document.querySelectorAll(".card");
+
+  // Loop through all cards and make them visible
+  cards.forEach((card) => {
+    card.classList.add("visible"); // Add the 'visible' class to make cards appear
+  });
+});
+// Closing the FAQ modal when the "X" button is clicked
+const faqCloseButton = document.getElementById("faqClose");
+faqCloseButton.addEventListener("click", () => {
+  const helpModal = document.getElementById("cc-helpModal");
+  helpModal.style.display = "none"; // Close the modal
+});
+
+// Function to open the modal
+function openFAQ() {
+  const helpModal = document.getElementById("cc-helpModal");
+  helpModal.style.display = "flex"; // Open the modal
+}
