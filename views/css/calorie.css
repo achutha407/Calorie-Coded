@@ -1,1 +1,241 @@
 
+/* Base reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #000000, #2c2c2c, #bc5f03, #a86904);
+    background-size: 400% 400%;
+    animation: gradientMotion 10s ease infinite;
+    overflow-x: hidden;
+  }
+  
+  body {
+    color: #fff;
+  }
+  
+  .container {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  @keyframes gradientMotion {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .left-side {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Needed to position child absolutely */
+    padding: 2rem;
+  }
+  
+  .main-img {
+    width: 150%;
+    height: 150%;
+    max-width: 600px;
+    max-height: 700px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .overlay-img{
+    position: absolute;
+    bottom: 40px;
+    right: -110px;
+    width: 65%;
+    height: 50%;
+    object-fit: contain;
+    z-index: 2;
+    transform: rotate(120deg);
+  }
+
+  .overlay-img-flipped{
+    position: absolute;
+    top: -12%;
+    left: -140px;
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    z-index: 2;
+    transform: rotate(310deg);
+  }
+
+  
+  .calorie-container {
+    display: flex;
+    flex-direction: row; /* or column depending on layout */
+    flex-wrap: wrap;
+    height: auto;
+    overflow-y: auto;
+    max-height: none;
+  }
+  
+  .go-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid #ffffff33;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+  
+  .go-back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.08);
+    box-shadow: 0 0 12px #ff5e00;
+  }
+  
+  
+  .right-side {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-form {
+    background: rgba(255, 255, 255, 0.05); /* existing glassmorphism */
+    padding: 2rem;
+    border-radius: 16px;
+    margin: 2rem auto; /* <- this adds vertical space */
+    backdrop-filter: blur(10px);
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  .modal-form h2,
+  .modal-form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-form input,
+  .modal-form select,
+  .modal-form button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #1a1a1a;
+    color: #fff;
+  }
+  
+  .modal-form button {
+    background: #ff5e00;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .modal-form button:hover {
+    background: #ff3e00;
+  }
+  
+  .result-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .goal-btn {
+    margin: 10px;
+    padding: 10px 20px;
+    background: #262626;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .goal-btn:hover {
+    background: #ff5e00;
+    border-color: #ff5e00;
+  }
+  
+  #calorieOutput {
+    margin-top: 15px;
+    font-size: 24px;
+    color: #ffdd57;
+    font-weight: bold;
+  }
+  
+  .redirect-card {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .meal-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #ff5e00;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background 0.3s;
+  }
+  
+  .meal-btn:hover {
+    background: #ff3e00;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .height-converter {
+    margin-bottom: 1px;
+    color: #ccc;
+    font-size: 0.95rem;
+  }
+  
+  .height-inputs {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+  }
+  
+  .height-inputs input {
+    width: 70px;
+    padding: 8px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+  }
+  
+  .height-inputs button {
+    padding: 8px 12px;
+    background: #ff5e00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .height-inputs button:hover {
+    background: #ff3e00;
+  }
+  
