@@ -1,1 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calorie Coded - Home</title>
+  <link rel="stylesheet" href="views/css/index.css" />
+  <link rel="icon" href="views/pics/favicom.png">
+</head>
+<body>
+  <header class="glass-header">
+    <div class="nav-left">
+      <div class="icon" onclick="redirect('calorie.html')">
+        <img src="views/pics/cal.png" alt="Calorie Calculator" />
+        <span>Calorie Calculator</span>
+      </div>
+      <div class="icon" onclick="redirect('prog.html')">
+        <img src="views/pics/progress.png" alt="Progress Tracker" />
+        <span>Progress Tracker</span>
+      </div>
+      <div class="icon" onclick="redirect('meal.html')">
+        <img src="views/pics/meala.png" alt="Meal Suggestions" />
+        <span>Meal Suggestions</span>
+      </div>
+    </div>
+    <div class="logo">
+      <img src="views/pics/logo.png" alt="Calorie Coded Logo" class="logo" />
+    </div>
+    <div class="nav-right" id="navAuth">
+      <div class="icon" onclick="openModal('login')">
+        <img src="views/pics/login.png" alt="Login" />
+        <span>Login</span>
+      </div>
+      <div class="icon" onclick="openModal('signup')">
+        <img src="views/pics/signup.png" alt="Signup" />
+        <span>Signup</span>
+      </div>
+      <div class="icon" onclick="openModal('cc-helpModal')">
+        <img src="views/pics/help.png" alt="Help" />
+        <span>Help</span>
+      </div>
+    </div>
+  </header>
 
+  <section class="hero">
+    <div class="bowl-container">
+      <img src="views/pics/salad1.png" alt="Back Bowl" class="salad-bowl-back" />
+      <img src="views/pics/fruitnowl.png" alt="Main Bowl" class="salad-bowl" />
+    </div>
+    <div class="changing-text">
+      <span id="typewriter"></span>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>What We Offer</h2>
+    <div class="card" onclick="redirect('calorie.html')">
+      <img src="views/pics/fmuscle.png" alt="Calorie" class="imgc" />
+      <div class="card-info">
+        <h3>Calorie Calculator</h3>
+        <p>Easily track your meals or add your own and count the calories with ease.<br>Perfect for staying on top of your nutrition!</p>
+      </div>
+    </div>
+    <div class="card" onclick="redirect('prog.html')">
+      <img src="views/pics/prog2.png" alt="Progress" />
+      <div class="card-info">
+        <h3>Progress Tracker</h3>
+        <p>Keep a log of your meals, weight, and macros to see your progress over time.<br>A great way to visualize your fitness journey!</p>
+      </div>
+    </div>
+    <div class="card" onclick="redirect('meal.html')">
+      <img src="views/pics/salad4.png" alt="Meal" />
+      <div class="card-info">
+        <h3>Meal Suggestions</h3>
+        <p>Get personalized meal suggestions based on your goals<br>whether you're looking to bulk up, follow keto, or cut down.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>About Calorie Coded</h2>
+    <p>Calorie Coded was created by a passionate gym enthusiast who once struggled to keep track of macros and meals. This app seamlessly combines calorie counting, AI-driven meal planning, and progress tracking to make your fitness journey smoother and more efficient.</p>
+  </section>
+
+  <footer>
+    <div class="footer-tag">
+      <img src="views/pics/foot2.png" alt="Tagline Image" />
+      <p>"Fuel Smart. Train Hard. Track Everything."</p>
+    </div>
+  </footer>
+
+  <!-- Modals -->
+<!-- Signup Modal -->
+<dialog id="signup" class="modal">
+  <div class="modal-content glass-card">
+    <span class="close" onclick="closeModal('signup')">&times;</span>
+    <h2>Sign Up</h2>
+    <input type="text" id="signupUsername" placeholder="Username" required>
+    <input type="email" id="signupEmail" placeholder="Email" required>
+    <input type="password" id="signupPassword" placeholder="Password" required>
+    <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+    <button type="button" onclick="signupUser()">Create Account</button>
+  </div>
+</dialog>
+
+<!-- Login Modal -->
+<dialog id="login" class="modal">
+  <div class="modal-content glass-card">
+    <span class="close" onclick="closeModal('login')">&times;</span>
+    <h2>Log In</h2>
+    <input type="text" id="loginUsername" placeholder="Username" required>
+    <input type="password" id="loginPassword" placeholder="Password" required>
+    <button type="button" onclick="loginUser()">Log In</button>
+  </div>
+</dialog>
+<!-- Help / FAQ Modal -->
+<div class="cc-help-modal" id="cc-helpModal">
+  <div class="cc-help-content">
+    <span id="faqClose" class="faq-close-btn">&times;</span>
+    <h2 class="cc-help-title">Frequently Asked Questions</h2>
+    <div class="cc-help-accordion">
+      <div class="cc-help-item">
+        <button class="cc-help-question">How does Calorie Coded work?</button>
+        <div class="cc-help-answer">
+          <p>Calorie Coded calculates your daily caloric needs and gives you meal suggestions tailored to your goals and diet type.</p>
+        </div>
+      </div>
+      <div class="cc-help-item">
+        <button class="cc-help-question">Do I need to create an account?</button>
+        <div class="cc-help-answer">
+          <p>You can explore basic features without signing up, but creating an account helps you save your preferences and progress.</p>
+        </div>
+      </div>
+      <div class="cc-help-item">
+        <button class="cc-help-question">Can I change my goal or diet later?</button>
+        <div class="cc-help-answer">
+          <p>Yes! You can always go back to the Calorie Calculator or Meal Suggestion pages and update your selections.</p>
+        </div>
+      </div>
+      <!-- Add more FAQs as needed -->
+    </div>
+  </div>
+</div>
+
+  <div id="customAlert" class="custom-alert"></div>
+
+  <div class="cursor" id="cursor"></div>
+  <script src="views/js/index.js"></script>
+</body>
+</html>
