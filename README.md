@@ -19,5 +19,3 @@ Calorie Coded is a powerful calorie tracking web application designed to help us
 - **Frontend**: Html, CSS, JavaScript
 - **Backend**: Node.js, Express.js  
 - **Database**: MongoDB  
-
-
